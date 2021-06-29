@@ -1,10 +1,20 @@
 package br.ufpb.dcx.aps.formbuilder.models;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+
+@AllArgsConstructor
+@NoArgsConstructor
+@Getter
+@Setter
 @Entity
 public class Produto {
 
@@ -14,34 +24,6 @@ public class Produto {
     private String nome;
     private String descricao;
 
-    public Produto(String nome, String descricao) {
-        this.nome = nome;
-        this.descricao = descricao;
-    }
-
-    public Produto() {
-        this("", "");
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public String getNome() {
-        return nome;
-    }
-
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
-
-    public String getDescricao() {
-        return descricao;
-    }
-
-    public void setDescricao(String descricao) {
-        this.descricao = descricao;
-    }
 }
 
 
