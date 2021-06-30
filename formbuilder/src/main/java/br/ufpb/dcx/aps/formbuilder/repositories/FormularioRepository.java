@@ -8,4 +8,5 @@ import java.io.Serializable;
 
 @Repository
 public interface FormularioRepository extends JpaRepository<Formulario, Long> {
+    Formulario getByTitulo(String titulo);
 }

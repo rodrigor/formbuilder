@@ -16,9 +16,13 @@ public class Formulario {
     private List<Campo> campos;
     private String titulo;
 
-    public Formulario(String titulo) {
-        this.titulo = titulo;
+    public Formulario() {
         this.campos = new LinkedList<>();
+    }
+
+    public Formulario(String titulo) {
+        this();
+        this.titulo = titulo;
     }
     public void setId(Long id) {
         this.id = id;

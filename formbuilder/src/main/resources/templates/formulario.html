@@ -95,7 +95,7 @@
         <nav class="navbar w-100 text-center">
             <div class="col-4"></div>
             <div class="col-4">
-                <span class="navbar-brand text-center"> Título do formulário </span>
+                <span class="navbar-brand" th:text="${formDinamico.titulo}"></span>
             </div>
             <div class="col-4"></div>
         </nav>
@@ -104,10 +104,10 @@
         <div class="col">
         </div>
         <div class="col-8">
-            <form action="#" th:action="@{/produtos/criar}" th:each="c : ${campos}"method="post">
-                <div class="form-group">
+            <form action="#" method="post">
+                <div class="form-group" th:each="c : ${formDinamico.campos}">
                     <label><span th:text="${c.label}"></span></label>
-                    <input type="text" class="form-control" th:field="*{descricao}" placeholder="Digite o valor do campo">
+                    <input type="text" class="form-control" placeholder="Digite o valor do campo">
                 </div>
                 <div class="form-row">
                     <div class="col-4"></div>

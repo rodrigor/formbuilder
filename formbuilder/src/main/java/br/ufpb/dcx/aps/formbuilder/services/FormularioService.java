@@ -24,7 +24,7 @@ public class FormularioService {
 
     @PostConstruct
     private void initFormulario() {
-        Formulario formulario = new Formulario("Formulario teste");
+        Formulario formulario = new Formulario("forms_1");
         List<Campo> campos = new LinkedList<>();
 
         Campo campo1 = new Campo("campo 1");
@@ -48,8 +48,8 @@ public class FormularioService {
         return formulario;
     }
 
-    public Formulario FormulariopegarUmFormularioPorId(Long id){
-        return this.formularioRepository.getById(id);
+    public Formulario pegarPorTitulo(String titulo){
+        return this.formularioRepository.getByTitulo(titulo);
     }
 
 }
