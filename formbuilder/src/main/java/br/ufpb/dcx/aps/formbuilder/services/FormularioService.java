@@ -7,11 +7,10 @@ import br.ufpb.dcx.aps.formbuilder.models.Campo;
 import br.ufpb.dcx.aps.formbuilder.models.Formulario;
 import br.ufpb.dcx.aps.formbuilder.repositories.CampoRepository;
 import br.ufpb.dcx.aps.formbuilder.repositories.FormularioRepository;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -26,16 +25,10 @@ public class FormularioService {
 
 
     public Formulario buscaFormulario(long formularioId){
-        if(!this.formularioRepository.existById(formularioId)){
-            throw new FormularioNaoEncontradoException("Formulário não encontrado");
-        }
         return this.formularioRepository.findById(formularioId);
     }
 
     public Formulario buscaFormulario(String titulo){
-        if(!this.formularioRepository.existByTitulo(titulo)){
-            throw new FormularioNaoEncontradoException("Formulário não encontrado");
-        }
         return this.formularioRepository.findByTitulo(titulo);
     }
 
@@ -58,7 +51,7 @@ public class FormularioService {
         return formulario;
     }
 
-    public FormularioDTO criarNovoFormularioDTO(@NotBlank String titulo, @NotNull List<String> labels){
+    public FormularioDTO criarNovoFormularioDTO( String titulo,  List<String> labels){
 
         FormularioDTO novoFormularioDTO = new FormularioDTO(titulo);
 

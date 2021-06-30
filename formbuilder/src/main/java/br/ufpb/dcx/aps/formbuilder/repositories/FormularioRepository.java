@@ -7,10 +7,9 @@ import org.springframework.stereotype.Repository;
 import java.io.Serializable;
 
 @Repository
-public interface FormularioRepository <T, ID extends Serializable> extends JpaRepository<Formulario, Long> {
+public interface FormularioRepository extends JpaRepository<Formulario, Long> {
 
     public Formulario findById(long id);
-    public boolean existByTitulo(String titulo);
+
     public Formulario findByTitulo(String titulo);
-    public boolean existById(long id);
 }

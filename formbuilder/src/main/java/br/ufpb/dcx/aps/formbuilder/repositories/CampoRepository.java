@@ -7,7 +7,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.io.Serializable;
 import java.util.List;
 
-public interface CampoRepository <T, ID extends Serializable> extends JpaRepository<Campo, Long> {
+public interface CampoRepository extends JpaRepository<Campo, Long> {
 
     public Campo findById(long id);
 
