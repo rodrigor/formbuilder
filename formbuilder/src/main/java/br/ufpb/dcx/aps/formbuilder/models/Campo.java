@@ -1,26 +1,30 @@
 package br.ufpb.dcx.aps.formbuilder.models;
 
-import lombok.Data;
+import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
-@Data
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 public class Campo {
 
-    @NotBlank
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Id
     private Long id;
-    @NotBlank
     private String label;
 
-    @NotNull
     private String valor;
 
-    @NotBlank
     @ManyToOne
     private Formulario formulario;
+
+    public Campo(String label, Formulario formulario){
+        this.label = label;
+        this.formulario = formulario;
+    }
 }
