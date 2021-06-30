@@ -22,8 +22,6 @@ public class Formulario {
 
     private String titulo;
 
-    public Formulario(String titulo){
-        this.titulo = titulo;
-    }
+
 
 }

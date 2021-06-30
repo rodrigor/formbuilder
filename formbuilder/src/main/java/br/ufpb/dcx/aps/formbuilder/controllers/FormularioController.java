@@ -1,5 +1,7 @@
 package br.ufpb.dcx.aps.formbuilder.controllers;
 
+import br.ufpb.dcx.aps.formbuilder.DTOs.CampoDTO;
+import br.ufpb.dcx.aps.formbuilder.DTOs.FormularioDTO;
 import br.ufpb.dcx.aps.formbuilder.models.Campo;
 import br.ufpb.dcx.aps.formbuilder.models.Formulario;
 import br.ufpb.dcx.aps.formbuilder.repositories.FormularioRepository;
@@ -11,6 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.PostConstruct;
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -31,8 +34,9 @@ public class FormularioController {
     }
 
     @GetMapping("criar/")
-    public Formulario salvar(String titulo, List<String> labels){
-        return this.formularioService.criarNovoFormulario(titulo,labels);
+    public Formulario salvarNovoFormulario(String titulo, List<String> labels){
+
+        return this.criarESalvar(this.formularioService.criarNovoFormularioDTO(titulo,labels));
     }
 
     @GetMapping("{formularioId}")
@@ -40,4 +44,23 @@ public class FormularioController {
         return this.formularioService.listaCampos(formularioId);
     }
 
+    public Formulario criarESalvar(FormularioDTO formularioDTO){
+        Formulario novoFormulario = new Formulario();
+        novoFormulario.setTitulo(formularioDTO.getTitulo());
+
+        List<CampoDTO> camposDTO = formularioDTO.getCampos();
+        List<Campo> campos = new ArrayList<>();
+
+        for(CampoDTO campoDTO: camposDTO){
+            Campo novoCampo = new Campo();
+            novoCampo.setFormulario(novoFormulario);
+            novoCampo.setLabel(campoDTO.getLabel());
+            campos.add(novoCampo);
+            this.formularioService.salvarCampo(novoCampo);
+        }
+
+        novoFormulario.setCampos(campos);
+        this.formularioService.salvarFormulario(novoFormulario);
+        return novoFormulario;
+    }
 }

@@ -1,5 +1,7 @@
 package br.ufpb.dcx.aps.formbuilder.services;
 
+import br.ufpb.dcx.aps.formbuilder.DTOs.CampoDTO;
+import br.ufpb.dcx.aps.formbuilder.DTOs.FormularioDTO;
 import br.ufpb.dcx.aps.formbuilder.exceptions.FormularioNaoEncontradoException;
 import br.ufpb.dcx.aps.formbuilder.models.Campo;
 import br.ufpb.dcx.aps.formbuilder.models.Formulario;
@@ -11,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -39,23 +42,29 @@ public class FormularioService {
         return this.campoRepository.findAllByFormulario(formulario);
     }
 
-    @PostConstruct
-    public Formulario criarNovoFormulario(String titulo, List<String> labels){
-
-        Formulario novoFormulario = new Formulario(titulo);
-
-        List<Campo> campos = new LinkedList<>();
-
-        for(String label: labels){
-            Campo novoCampo = new Campo(label, novoFormulario);
-            campos.add(novoCampo);
-            this.formularioRepository.save(novoCampo);
-        }
-
-        novoFormulario.setCampos(campos);
-        this.formularioRepository.save(novoFormulario);
-        return novoFormulario;
+    public Campo salvarCampo(Campo campo){
+        this.campoRepository.save(campo);
+        return campo;
     }
 
+    public Formulario salvarFormulario(Formulario formulario){
+        this.formularioRepository.save(formulario);
+        return formulario;
+    }
+
+    public FormularioDTO criarNovoFormularioDTO(String titulo, List<String> labels){
+
+        FormularioDTO novoFormularioDTO = new FormularioDTO(titulo);
+
+        List<CampoDTO> camposDTO = new LinkedList<>();
+
+        for(String label: labels){
+            CampoDTO novoCampoDTO = new CampoDTO(label, novoFormularioDTO);
+            camposDTO.add(novoCampoDTO);
+        }
+
+        novoFormularioDTO.setCampos(camposDTO);
+        return novoFormularioDTO;
+    }
 
 }

@@ -23,8 +23,4 @@ public class Campo {
     @ManyToOne
     private Formulario formulario;
 
-    public Campo(String label, Formulario formulario){
-        this.label = label;
-        this.formulario = formulario;
-    }
 }
