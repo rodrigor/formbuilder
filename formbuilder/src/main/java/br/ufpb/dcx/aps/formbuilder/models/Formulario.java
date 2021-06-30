@@ -1,37 +1,25 @@
 package br.ufpb.dcx.aps.formbuilder.models;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import lombok.Data;
+
+import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import java.util.*;
 
+@Data
 @Entity
 public class Formulario {
 
-    @GeneratedValue
+    @NotBlank
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Id
     private Long id;
+
+    @NotBlank
     @OneToMany
     private List<Campo> campos;
 
-    public Formulario() {
-        this.campos = new LinkedList<>();
-    }
+    @NotBlank
+    private String titulo;
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public List<Campo> getCampos() {
-        return campos;
-    }
-
-    public void setCampos(List<Campo> campos) {
-        this.campos = campos;
-    }
-
-    public Long getId() {
-        return id;
-    }
 }

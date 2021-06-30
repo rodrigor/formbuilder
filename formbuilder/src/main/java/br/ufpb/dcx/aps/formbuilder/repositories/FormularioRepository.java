@@ -8,4 +8,6 @@ import java.io.Serializable;
 
 @Repository
 public interface FormularioRepository <T, ID extends Serializable> extends JpaRepository<Formulario, Long> {
+
+    public Formulario findById(long id);
 }
