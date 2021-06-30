@@ -20,6 +20,10 @@ public class Campo {
         this.valor = valor;
     }
 
+    public Campo(String label) {
+        this.label = label;
+    }
+
     public Campo() {
         this("", "");
     }

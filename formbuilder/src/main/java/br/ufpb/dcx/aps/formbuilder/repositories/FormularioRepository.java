@@ -7,5 +7,5 @@ import org.springframework.stereotype.Repository;
 import java.io.Serializable;
 
 @Repository
-public interface FormularioRepository <T, ID extends Serializable> extends JpaRepository<Formulario, Long> {
+public interface FormularioRepository extends JpaRepository<Formulario, Long> {
 }

@@ -14,11 +14,12 @@ public class Formulario {
     private Long id;
     @OneToMany
     private List<Campo> campos;
+    private String titulo;
 
-    public Formulario() {
+    public Formulario(String titulo) {
+        this.titulo = titulo;
         this.campos = new LinkedList<>();
     }
-
     public void setId(Long id) {
         this.id = id;
     }
@@ -33,5 +34,13 @@ public class Formulario {
 
     public Long getId() {
         return id;
+    }
+
+    public String getTitulo() {
+        return titulo;
+    }
+
+    public void setTitulo(String titulo) {
+        this.titulo = titulo;
     }
 }

@@ -104,26 +104,10 @@
         <div class="col">
         </div>
         <div class="col-8">
-            <form action="#" th:action="@{/produtos/criar}" th:object="${produtoForm}" method="post">
+            <form action="#" th:action="@{/produtos/criar}" th:each="c : ${campos}"method="post">
                 <div class="form-group">
-                    <label>Campo 1</label>
-                    <input type="text" class="form-control" th:field="*{descricao}" placeholder="valor campo 1">
-                </div>
-                <div class="form-group">
-                    <label for="TxtObservacoes">Campo 2</label>
-                    <input type="text" class="form-control" th:field="*{descricao}" placeholder="Insira o nome do produto">
-                </div>
-                <div class="form-group">
-                    <label for="TxtObservacoes">Campo 3</label>
-                    <input type="text" class="form-control" th:field="*{descricao}" placeholder="Insira o nome do produto">
-                </div>
-                <div class="form-group">
-                    <label for="TxtObservacoes">Campo 4</label>
-                    <input type="text" class="form-control" th:field="*{descricao}" placeholder="Insira o nome do produto">
-                </div>
-                <div class="form-group">
-                    <label for="TxtObservacoes">Campo 5</label>
-                    <input type="text" class="form-control" th:field="*{descricao}" placeholder="Insira o nome do produto">
+                    <label><span th:text="${c.label}"></span></label>
+                    <input type="text" class="form-control" th:field="*{descricao}" placeholder="Digite o valor do campo">
                 </div>
                 <div class="form-row">
                     <div class="col-4"></div>
