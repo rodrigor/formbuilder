@@ -4,15 +4,10 @@ import br.ufpb.dcx.aps.formbuilder.DTOs.CampoDTO;
 import br.ufpb.dcx.aps.formbuilder.DTOs.FormularioDTO;
 import br.ufpb.dcx.aps.formbuilder.models.Campo;
 import br.ufpb.dcx.aps.formbuilder.models.Formulario;
-import br.ufpb.dcx.aps.formbuilder.repositories.FormularioRepository;
 import br.ufpb.dcx.aps.formbuilder.services.FormularioService;
-import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-import javax.annotation.PostConstruct;
 import java.util.ArrayList;
 import java.util.List;
 
