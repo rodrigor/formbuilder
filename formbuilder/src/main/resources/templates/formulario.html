@@ -95,7 +95,7 @@
         <nav class="navbar w-100 text-center">
             <div class="col-4"></div>
             <div class="col-4">
-                <span class="navbar-brand text-center"> Título do formulário </span>
+                <span class="navbar-brand text-center"> Cadastrar Formulário </span>
             </div>
             <div class="col-4"></div>
         </nav>
@@ -104,10 +104,11 @@
         <div class="col">
         </div>
         <div class="col-8">
-            <form action="#" th:action="@{/produtos/criar}" th:object="${produtoForm}" method="post">
+            <form action="#" th:action="@{/formularios/criar}" th:object="${formularioForm}" method="post">
                 <div class="form-group">
                     <label>Campo 1</label>
-                    <input type="text" class="form-control" th:field="*{descricao}" placeholder="valor campo 1">
+                    <input type="text" class="form-control" th:field="*{label}" placeholder="Digite o nome do campo">
+                    <input type="text" class="form-control" th:field="*{label}" placeholder="Digite o nome do campo">
                 </div>
                 <div class="form-group">
                     <label for="TxtObservacoes">Campo 2</label>
