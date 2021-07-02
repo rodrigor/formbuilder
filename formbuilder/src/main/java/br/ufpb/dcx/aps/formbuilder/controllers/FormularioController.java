@@ -34,11 +34,4 @@ public class FormularioController {
         mv.addObject("formDinamico", formulario);
         return mv;
     }
-
-    @GetMapping("criar")
-    public Formulario salvarNovoFormulario(String titulo){
-        return this.formularioService.salvarFormulario(new FormularioDTO(titulo));
-    }
-
-
 }
