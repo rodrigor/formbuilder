@@ -31,8 +31,4 @@ public class FormularioController {
         mv.addObject("formDinamico", formulario);
         return mv;
     }
-
-
-
-
 }
