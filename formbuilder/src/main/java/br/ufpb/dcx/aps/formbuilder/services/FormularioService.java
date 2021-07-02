@@ -10,7 +10,6 @@ import org.springframework.stereotype.Service;
 import javax.annotation.PostConstruct;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class FormularioService {
@@ -50,6 +49,10 @@ public class FormularioService {
 
     public Formulario pegarPorTitulo(String titulo){
         return this.formularioRepository.getByTitulo(titulo);
+    }
+
+    public List<Formulario> pegarTodos(){
+        return this.formularioRepository.findAll();
     }
 
 }

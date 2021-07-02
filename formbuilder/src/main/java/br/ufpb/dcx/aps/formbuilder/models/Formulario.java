@@ -1,5 +1,7 @@
 package br.ufpb.dcx.aps.formbuilder.models;
 
+import org.hibernate.annotations.Cascade;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -13,6 +15,7 @@ public class Formulario {
     @Id
     private Long id;
     @OneToMany
+    @Cascade(org.hibernate.annotations.CascadeType.REMOVE)
     private List<Campo> campos;
     private String titulo;
 
