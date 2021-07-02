@@ -1,15 +1,12 @@
 package br.ufpb.dcx.aps.formbuilder.models;
 
 import lombok.*;
+import org.hibernate.annotations.Cascade;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotBlank;
-import java.util.*;
+import java.util.List;
 
-@Getter
-@Setter
-@AllArgsConstructor
-@NoArgsConstructor
+@Data
 @Entity
 public class Formulario {
 
@@ -18,13 +15,15 @@ public class Formulario {
     private Long id;
 
     @OneToMany
+    @Cascade(org.hibernate.annotations.CascadeType.REMOVE)
     private List<Campo> campos;
-
     private String titulo;
 
-    public Formulario(String titulo){
+    public Formulario(String titulo) {
         this.titulo = titulo;
     }
 
-
+    public Formulario() {
+        this("");
+    }
 }

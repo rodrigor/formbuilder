@@ -95,48 +95,46 @@
         <nav class="navbar w-100 text-center">
             <div class="col-4"></div>
             <div class="col-4">
-                <span class="navbar-brand text-center"> Cadastrar Formulário </span>
+                Formulários
             </div>
             <div class="col-4"></div>
         </nav>
     </div>
     <div class="row">
-        <div class="col">
-        </div>
+        <div class="col"></div>
         <div class="col-8">
-            <form action="#" th:action="@{/formularios/criar}" th:object="${formularioForm}" method="post">
-                <div class="form-group">
-                    <label>Campo 1</label>
-                    <input type="text" class="form-control" th:field="*{label}" placeholder="Digite o nome do campo">
-                    <input type="text" class="form-control" th:field="*{label}" placeholder="Digite o nome do campo">
+            <div class="row">
+                <div class="col-6"></div>
+                <div class="col-3"></div>
+                <div class="col-3">
+                    <button class="btn btn-success">Criar Formulário</button>
                 </div>
-                <div class="form-group">
-                    <label for="TxtObservacoes">Campo 2</label>
-                    <input type="text" class="form-control" th:field="*{descricao}" placeholder="Insira o nome do produto">
-                </div>
-                <div class="form-group">
-                    <label for="TxtObservacoes">Campo 3</label>
-                    <input type="text" class="form-control" th:field="*{descricao}" placeholder="Insira o nome do produto">
-                </div>
-                <div class="form-group">
-                    <label for="TxtObservacoes">Campo 4</label>
-                    <input type="text" class="form-control" th:field="*{descricao}" placeholder="Insira o nome do produto">
-                </div>
-                <div class="form-group">
-                    <label for="TxtObservacoes">Campo 5</label>
-                    <input type="text" class="form-control" th:field="*{descricao}" placeholder="Insira o nome do produto">
-                </div>
-                <div class="form-row">
-                    <div class="col-4"></div>
-                    <div class="col-4"></div>
-                    <div class="col-4">
-                        <div class="form-group col-12">
-                            <a type="submit" class="btn btn-danger mb-6" href="/produtos/">Voltar</a>
-                            <button type="submit" class="btn btn-success mb-6">Confirmar</button>
-                        </div>
-                    </div>                  
-                </div>
-            </form>
+            </div>
+            <div class="row">
+                <table class="table table-dark table-hover" th:each="f : ${formularios}">
+                    <thead>
+                    <tr>
+                        <th scope="col">ID</th>
+                        <th scope="col">Titulo</th>
+                        <th scope="col">Ações</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr> 
+                        <th scope="row"> <span th:text="${f.id}"></span></th>
+                        <td scope="row">
+                            <a th:href="@{/formularios/details(titulo=${f.titulo})}" class="nav-link navbar-brand" style="text-decoration: none; color:#fff">
+                                <span th:text="${f.titulo}"></span>
+                            </a>
+                        </td >
+                        <td scope="row">
+                            <a href="#" class="btn btn-primary">Editar</a>
+                            <a href="#" class="btn btn-danger">Excluir</a>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
         <div class="col"></div>
     </div>
@@ -145,5 +143,6 @@
 <script src="https://code.jquery.com/jquery-3.3.1.slim.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.js"></script>
+
 </body>
 </html>

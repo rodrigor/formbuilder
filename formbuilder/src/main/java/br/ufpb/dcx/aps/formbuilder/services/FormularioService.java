@@ -11,6 +11,9 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import javax.annotation.PostConstruct;
+import java.util.LinkedList;
+
 
 @Service
 public class FormularioService {
@@ -21,35 +24,55 @@ public class FormularioService {
     @Autowired
     private CampoRepository campoRepository;
 
+    @PostConstruct
+    private void initFormulario() {
+        Formulario formulario = new Formulario("forms_1");
+        List<Campo> campos = new LinkedList<>();
 
-    public Formulario buscaFormulario(long formularioId){
-        if(this.existe(formularioId)) {
+        Campo campo1 = new Campo("campo 1");
+        Campo campo2 = new Campo("campo 2");
+        Campo campo3 = new Campo("campo 3");
+
+        this.campoRepository.save(campo1);
+        this.campoRepository.save(campo2);
+        this.campoRepository.save(campo3);
+
+        campos.add(campo1);
+        campos.add(campo2);
+        campos.add(campo3);
+
+        formulario.setCampos(campos);
+        this.formularioRepository.save(formulario);
+    }
+
+    public Formulario buscaFormulario(long formularioId) {
+        if (this.existe(formularioId)) {
             return this.formularioRepository.findById(formularioId);
         }
         throw new FormularioNaoEncontradoException("Formulário não encontrado!");
     }
 
-    public Formulario buscaFormulario(String titulo){
-        if(this.existe(titulo)) {
+    public Formulario buscaFormulario(String titulo) {
+        if (this.existe(titulo)) {
             return this.formularioRepository.findByTitulo(titulo);
         }
         throw new FormularioNaoEncontradoException("Formulário não encontrado!");
     }
 
-    public List<Formulario> listaFormularios(){
+    public List<Formulario> listaFormularios() {
         return this.formularioRepository.findAll();
     }
 
-    public List<Campo> listaCampos(long formularioId){
+    public List<Campo> listaCampos(long formularioId) {
         return this.formularioRepository.findById(formularioId).getCampos();
     }
 
-    public Campo salvarCampo(Campo campo){
+    public Campo salvarCampo(Campo campo) {
         this.campoRepository.save(campo);
         return campo;
     }
 
-    public Formulario salvarFormulario(FormularioDTO formularioDTO){
+    public Formulario salvarFormulario(FormularioDTO formularioDTO) {
         Formulario novoFormulario = new Formulario(formularioDTO.getTitulo());
         this.campoRepository.saveAll(formularioDTO.getCampos());
         this.formularioRepository.save(novoFormulario);
@@ -57,14 +80,27 @@ public class FormularioService {
     }
 
 
-    public boolean existe(Long id){
+    public boolean existe(Long id) {
         Optional<Formulario> form = this.formularioRepository.findById(id);
         return form.isPresent();
     }
 
-    public boolean existe(String titulo){
-        Formulario form = this.formularioRepository.findByTitulo(titulo);
-        return (form != null);
+    public boolean existe(String titulo) {
+        return this.pegarPorTitulo(titulo) != null;
+    }
+
+
+    public Formulario criarFormulario(Formulario formulario) {
+        this.formularioRepository.save(formulario);
+        return formulario;
+    }
+
+    public Formulario pegarPorTitulo(String titulo) {
+        return this.formularioRepository.findByTitulo(titulo);
+    }
+
+    public List<Formulario> pegarTodos() {
+        return this.formularioRepository.findAll();
     }
 
 }
