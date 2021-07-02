@@ -1,6 +1,5 @@
 package br.ufpb.dcx.aps.formbuilder.services;
 
-import br.ufpb.dcx.aps.formbuilder.DTOs.CampoDTO;
 import br.ufpb.dcx.aps.formbuilder.DTOs.FormularioDTO;
 import br.ufpb.dcx.aps.formbuilder.exceptions.FormularioNaoEncontradoException;
 import br.ufpb.dcx.aps.formbuilder.models.Campo;
@@ -10,8 +9,6 @@ import br.ufpb.dcx.aps.formbuilder.repositories.FormularioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
 
@@ -26,14 +23,14 @@ public class FormularioService {
 
 
     public Formulario buscaFormulario(long formularioId){
-        if(ifExists(formularioId)) {
+        if(this.existe(formularioId)) {
             return this.formularioRepository.findById(formularioId);
         }
         throw new FormularioNaoEncontradoException("Formulário não encontrado!");
     }
 
     public Formulario buscaFormulario(String titulo){
-        if(ifExists(titulo)) {
+        if(this.existe(titulo)) {
             return this.formularioRepository.findByTitulo(titulo);
         }
         throw new FormularioNaoEncontradoException("Formulário não encontrado!");
@@ -60,12 +57,12 @@ public class FormularioService {
     }
 
 
-    public boolean ifExists(Long id){
+    public boolean existe(Long id){
         Optional<Formulario> form = this.formularioRepository.findById(id);
         return form.isPresent();
     }
 
-    public boolean ifExists(String titulo){
+    public boolean existe(String titulo){
         Formulario form = this.formularioRepository.findByTitulo(titulo);
         return (form != null);
     }
