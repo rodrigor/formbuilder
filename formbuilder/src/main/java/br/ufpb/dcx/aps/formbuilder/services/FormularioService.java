@@ -10,6 +10,7 @@ import br.ufpb.dcx.aps.formbuilder.repositories.FormularioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
@@ -43,8 +44,7 @@ public class FormularioService {
     }
 
     public List<Campo> listaCampos(long formularioId){
-        Formulario formulario = this.formularioRepository.findById(formularioId);
-        return this.campoRepository.findAllByFormulario(formulario);
+        return this.formularioRepository.findById(formularioId).getCampos();
     }
 
     public Campo salvarCampo(Campo campo){
@@ -52,25 +52,13 @@ public class FormularioService {
         return campo;
     }
 
-    public Formulario salvarFormulario(Formulario formulario){
-        this.formularioRepository.save(formulario);
-        return formulario;
+    public Formulario salvarFormulario(FormularioDTO formularioDTO){
+        Formulario novoFormulario = new Formulario(formularioDTO.getTitulo());
+        this.campoRepository.saveAll(formularioDTO.getCampos());
+        this.formularioRepository.save(novoFormulario);
+        return novoFormulario;
     }
 
-    public FormularioDTO criarNovoFormularioDTO( String titulo,  List<String> labels){
-
-        FormularioDTO novoFormularioDTO = new FormularioDTO(titulo);
-
-        List<CampoDTO> camposDTO = new LinkedList<>();
-
-        for(String label: labels){
-            CampoDTO novoCampoDTO = new CampoDTO(label, novoFormularioDTO);
-            camposDTO.add(novoCampoDTO);
-        }
-
-        novoFormularioDTO.setCampos(camposDTO);
-        return novoFormularioDTO;
-    }
 
     public boolean ifExists(Long id){
         Optional<Formulario> form = this.formularioRepository.findById(id);

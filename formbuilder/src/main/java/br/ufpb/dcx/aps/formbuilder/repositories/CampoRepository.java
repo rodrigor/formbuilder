@@ -11,5 +11,4 @@ public interface CampoRepository extends JpaRepository<Campo, Long> {
 
     public Campo findById(long id);
 
-    public List<Campo> findAllByFormulario(Formulario formulario);
 }

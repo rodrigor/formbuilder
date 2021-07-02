@@ -21,7 +21,4 @@ public class Campo {
     private String valor;
 
 
-    @ManyToOne
-    private Formulario formulario;
-
 }
