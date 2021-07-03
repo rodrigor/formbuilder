@@ -6,32 +6,23 @@ import org.hibernate.annotations.Cascade;
 import javax.persistence.*;
 import java.util.List;
 
-@Data
+@Getter
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
+@NoArgsConstructor
 @Entity
 public class Formulario {
 
+    @EqualsAndHashCode.Exclude
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Id
     private Long id;
 
+    @Setter
     @OneToMany
     @Cascade(org.hibernate.annotations.CascadeType.REMOVE)
     private List<Campo> campos;
+
+    @Setter
     private String titulo;
 
-    public Formulario(String titulo) {
-        this.titulo = titulo;
-    }
-
-    public Formulario() {
-        this("");
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Formulario that = (Formulario) o;
-        return id.equals(that.id);
-    }
 }

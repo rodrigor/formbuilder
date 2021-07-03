@@ -17,7 +17,6 @@ public class FormularioTest {
     void setUp(){
         formularioDoTeste = new Formulario();
         formularioDoTeste.setTitulo("formulario teste");
-        formularioDoTeste.setId(4L);
 
         List<Campo> camposDoFormulario = new LinkedList<>();
 
@@ -54,15 +53,14 @@ public class FormularioTest {
 
     @Test
     void testeIgualdade(){
-        //Um formulário só é igual a outro se possuírem o mesmo ID
+        // Formulários só são iguais se possuírem o mesmo ID
 
         Formulario formulario2 = new Formulario();
-        formulario2.setId(3L);
-        assertFalse(formulario2.equals(formularioDoTeste));
+        assertNotEquals(formulario2.getTitulo(), formularioDoTeste.getTitulo());
 
 
         formulario2.setTitulo("formulario teste");
-        assertFalse(formulario2.equals(formularioDoTeste));
+        assertEquals(formulario2.getTitulo(), formularioDoTeste.getTitulo());
 
 
         List<Campo> camposDoFormulario = new LinkedList<>();
@@ -73,7 +71,7 @@ public class FormularioTest {
         camposDoFormulario.add(campo1);
 
         formulario2.setCampos(camposDoFormulario);
-        assertFalse(formulario2.equals(formularioDoTeste));
+        assertNotEquals(formulario2.getCampos(), formularioDoTeste.getCampos());
 
 
         Campo campo2 = new Campo();
@@ -87,10 +85,10 @@ public class FormularioTest {
         camposDoFormulario.add(campo3);
         formulario2.setCampos(camposDoFormulario);
 
-        assertFalse(formulario2.equals(formularioDoTeste));
+        assertEquals(formulario2.getCampos(), formularioDoTeste.getCampos());
 
+        // Mesmo não tendo nenhum atributo igual, esse teste terá que ser verdadeiro, já que ambos os Id são null
         Formulario formularioIgual = new Formulario();
-        formularioIgual.setId(4L);
-        assertTrue(formularioIgual.equals(formularioDoTeste));
+        assertEquals(formularioIgual, formularioDoTeste);
     }
 }

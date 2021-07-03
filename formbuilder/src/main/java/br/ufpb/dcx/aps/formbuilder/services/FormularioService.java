@@ -26,12 +26,18 @@ public class FormularioService {
 
     @PostConstruct
     private void initFormulario() {
-        Formulario formulario = new Formulario("forms_1");
+        Formulario formulario = new Formulario();
+        formulario.setTitulo("forms_1");
         List<Campo> campos = new LinkedList<>();
 
-        Campo campo1 = new Campo("campo 1");
-        Campo campo2 = new Campo("campo 2");
-        Campo campo3 = new Campo("campo 3");
+        Campo campo1 = new Campo();
+        campo1.setLabel("campo 1");
+
+        Campo campo2 = new Campo();
+        campo1.setLabel("campo 2");
+
+        Campo campo3 = new Campo();
+        campo3.setLabel("campo 3");
 
         this.campoRepository.save(campo1);
         this.campoRepository.save(campo2);
@@ -73,7 +79,8 @@ public class FormularioService {
     }
 
     public Formulario salvarFormulario(FormularioDTO formularioDTO) {
-        Formulario novoFormulario = new Formulario(formularioDTO.getTitulo());
+        Formulario novoFormulario = new Formulario();
+        novoFormulario.setTitulo(formularioDTO.getTitulo());
         this.campoRepository.saveAll(formularioDTO.getCampos());
         this.formularioRepository.save(novoFormulario);
         return novoFormulario;
