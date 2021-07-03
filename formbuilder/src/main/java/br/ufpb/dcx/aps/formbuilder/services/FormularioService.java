@@ -34,7 +34,7 @@ public class FormularioService {
         campo1.setLabel("campo 1");
 
         Campo campo2 = new Campo();
-        campo1.setLabel("campo 2");
+        campo2.setLabel("campo 2");
 
         Campo campo3 = new Campo();
         campo3.setLabel("campo 3");
