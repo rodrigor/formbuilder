@@ -10,7 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 import javax.annotation.PostConstruct;
 import java.util.LinkedList;
 
@@ -55,41 +54,40 @@ public class FormularioService {
         if (this.existe(formularioId)) {
             return this.formularioRepository.findById(formularioId);
         }
-        throw new FormularioNaoEncontradoException("Formulário não encontrado!");
+        throw new FormularioNaoEncontradoException("Formulário não encontrado");
     }
 
     public Formulario buscaFormulario(String titulo) {
         if (this.existe(titulo)) {
             return this.formularioRepository.findByTitulo(titulo);
         }
-        throw new FormularioNaoEncontradoException("Formulário não encontrado!");
+        throw new FormularioNaoEncontradoException("Formulário não encontrado");
     }
 
     public List<Formulario> listaFormularios() {
         return this.formularioRepository.findAll();
     }
 
-    public List<Campo> listaCampos(long formularioId) {
-        return this.formularioRepository.findById(formularioId).getCampos();
-    }
-
-    public Campo salvarCampo(Campo campo) {
-        this.campoRepository.save(campo);
-        return campo;
-    }
-
+    // explicar mudança
     public Formulario salvarFormulario(FormularioDTO formularioDTO) {
-        Formulario novoFormulario = new Formulario();
-        novoFormulario.setTitulo(formularioDTO.getTitulo());
-        this.campoRepository.saveAll(formularioDTO.getCampos());
-        this.formularioRepository.save(novoFormulario);
-        return novoFormulario;
+        if(formularioDTO == null){
+            throw new IllegalArgumentException("formularioDTO não pode ser nulo");
+        }
+        else if (formularioDTO.getCampos()== null || formularioDTO.getTitulo() == null) {
+            throw new IllegalArgumentException("formularioDTO não pode possuir atributos nulos");
+
+        } else {
+            Formulario novoFormulario = new Formulario();
+            novoFormulario.setTitulo(formularioDTO.getTitulo());
+            this.campoRepository.saveAll(formularioDTO.getCampos());
+            this.formularioRepository.save(novoFormulario);
+            return novoFormulario;
+        }
     }
 
-
+    // explicar mudança
     public boolean existe(Long id) {
-        Optional<Formulario> form = this.formularioRepository.findById(id);
-        return form.isPresent();
+        return this.pegarPorId(id) != null;
     }
 
     public boolean existe(String titulo) {
@@ -97,13 +95,13 @@ public class FormularioService {
     }
 
 
-    public Formulario criarFormulario(Formulario formulario) {
-        this.formularioRepository.save(formulario);
-        return formulario;
-    }
-
     public Formulario pegarPorTitulo(String titulo) {
         return this.formularioRepository.findByTitulo(titulo);
+    }
+
+    // explicar criação
+    public Formulario pegarPorId(long id){
+        return this.formularioRepository.findById(id);
     }
 
     public List<Formulario> pegarTodos() {
