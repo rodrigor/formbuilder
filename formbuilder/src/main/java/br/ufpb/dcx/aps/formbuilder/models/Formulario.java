@@ -12,7 +12,7 @@ import java.util.List;
 @Entity
 public class Formulario {
 
-    @EqualsAndHashCode.Exclude
+    @EqualsAndHashCode.Include
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Id
     private Long id;
@@ -23,6 +23,7 @@ public class Formulario {
     private List<Campo> campos;
 
     @Setter
+    @EqualsAndHashCode.Include
     private String titulo;
 
 }

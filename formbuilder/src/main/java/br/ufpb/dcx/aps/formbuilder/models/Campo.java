@@ -1,5 +1,6 @@
 package br.ufpb.dcx.aps.formbuilder.models;
 
+import br.ufpb.dcx.aps.formbuilder.validacaoDecorator.ValidadorDecorator;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -16,7 +17,7 @@ import javax.persistence.Id;
 @Entity
 public class Campo {
 
-    @EqualsAndHashCode.Exclude
+    @EqualsAndHashCode.Include
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     private Long id;

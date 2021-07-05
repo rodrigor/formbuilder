@@ -68,24 +68,21 @@ public class FormularioService {
         return this.formularioRepository.findAll();
     }
 
-    // explicar mudança
     public Formulario salvarFormulario(FormularioDTO formularioDTO) {
-        if(formularioDTO == null){
+        if(formularioDTO == null)
             throw new IllegalArgumentException("formularioDTO não pode ser nulo");
-        }
-        else if (formularioDTO.getCampos()== null || formularioDTO.getTitulo() == null) {
+
+
+        if (formularioDTO.getCampos()== null || formularioDTO.getTitulo() == null)
             throw new IllegalArgumentException("formularioDTO não pode possuir atributos nulos");
 
-        } else {
             Formulario novoFormulario = new Formulario();
             novoFormulario.setTitulo(formularioDTO.getTitulo());
             this.campoRepository.saveAll(formularioDTO.getCampos());
             this.formularioRepository.save(novoFormulario);
             return novoFormulario;
-        }
     }
 
-    // explicar mudança
     public boolean existe(Long id) {
         return this.pegarPorId(id) != null;
     }

@@ -89,6 +89,8 @@ public class FormularioTest {
 
         // Mesmo não tendo nenhum atributo igual, esse teste terá que ser verdadeiro, já que ambos os Id são null
         Formulario formularioIgual = new Formulario();
+        formularioIgual.setTitulo("formulario teste");
+        
         assertEquals(formularioIgual, formularioDoTeste);
     }
 }
