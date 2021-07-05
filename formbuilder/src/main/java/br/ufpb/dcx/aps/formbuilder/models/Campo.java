@@ -28,4 +28,6 @@ public class Campo {
     @Setter
     private String valor;
 
+    @Setter
+    private boolean obrigatorio;
 }
