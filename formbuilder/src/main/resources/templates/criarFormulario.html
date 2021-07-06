@@ -126,8 +126,8 @@
                 <div class="form-group" id="questions">
                     <div id="root"></div>
                     <div class="form-group">
-                        <button type="submit" class="btn btn-info mb-6" onmousedown="addQuestion()">Adicionar campo</button> 
-                        <button type="submit" class="btn btn-primary mb-6" onmousedown="addAny()">Remover campo</button>
+                        <button type="submit" class="btn btn-info mb-6" onclick="addQuestion()">Adicionar campo</button> 
+                        <button type="submit" class="btn btn-primary mb-6" onclick="addAny()">Remover campo</button>
                     </div>
                 </div>
 
@@ -136,7 +136,7 @@
                     <div class="col-4"></div>
                     <div class="col-4">
                         <div class="form-group col-12">
-                            <a type="submit" class="btn btn-danger mb-6" href="/produtos/">Voltar</a>
+                            <a type="submit" class="btn btn-danger mb-6" href="/formularios/">Voltar</a>
                             <button type="submit" class="btn btn-success mb-6">Confirmar</button>
                         </div>
                     </div>                  
@@ -151,29 +151,28 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.js"></script>
 <script>
-    function enableMail(){
-        let helpMail = document.getElementById('emailHelp');
-        let mailCheck = document.getElementById('flexCheckDefault1');
-        
-        if(mailCheck.checked) helpMail.style.display = 'block';
-        else helpMail.style.display = 'none';
+    function enableMail(checkBox, label){
+        if(checkBox.checked) label.style.display = 'block';
+        else label.style.display = 'none';
     }
 
-    function enableInterval(){
-        let minInput = document.getElementById('min');
-        let maxInput = document.getElementById('max');
-        let intervalCheck = document.getElementById('flexCheckDefault');
-
-        if(intervalCheck.checked) {
-            minInput.style.display = 'block';
-            maxInput.style.display = 'block';
+    function enableInterval(min, max, check){
+        if(check.checked) {
+            min.style.display = 'block';
+            max.style.display = 'block';
         } else {
-            minInput.style.display = 'none';
-            maxInput.style.display = 'none';
+            min .style.display = 'none';
+            max.style.display = 'none';
         }
     }
 
     function addQuestion(){
+        let idEmailCheck = `email${textoAleatorio(7)}`;
+        let idEmailDiv = `email${textoAleatorio(7)}`;
+        let idIntervalCheck = `inter${textoAleatorio(7)}`;
+        let idIntervalDiv = `inter${textoAleatorio(7)}`;
+        let idMinInput = `min${textoAleatorio(7)}`;
+        let idMaxInput = `max${textoAleatorio(7)}`;
         let childQuestion = '<section>' +
                             '<div class="form-group col-lg-8">' +
                                    ' <label>Pergunta</label>' +
@@ -183,25 +182,25 @@
                             '<div class="form-group col-lg-4">'   +
                                 '<label for="inputPassword4">Validação</label>' +
                                 '<div class="form-check form-row">' +
-                                    '<input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" onclick="enableInterval()">' +
-                                    '<label class="form-check-label" for="flexCheckDefault"> '+
+                                    `<input class="form-check-input" type="checkbox" value="" id="${idIntervalCheck}" onclick="enableInterval(${idMinInput}, ${idMaxInput}, ${idIntervalCheck})">` +
+                                    `<label class="form-check-label" for="${idIntervalCheck}">`+
                                         'Intervalo' +
                                     '</label>' +
                                     '<div class="row">' +
                                         '<div class="col-6">' +
-                                            '<input type="number"  class="form-control" placeholder="min" id="min" required>'+
+                                            `<input type="number"  class="form-control" placeholder="min" id="${idMinInput}" required>`+
                                         '</div>'+
                                         '<div class="col-6">' +
-                                            '<input type="number"  class="form-control" placeholder="max" id="max" required>'+
+                                            `<input type="number"  class="form-control" placeholder="max" id="${idMaxInput}" required>`+
                                         '</div>' +
                                     '</div>'+
                                 '</div>'+
                                 '<div class="form-check">'+
-                                    '<input class="form-check-input" type="checkbox" value="" id="flexCheckDefault1" onclick="enableMail()">'+
-                                    '<label class="form-check-label" for="flexCheckDefault1">'+
+                                    `<input class="form-check-input" type="checkbox" value="" id="${idEmailCheck}" onclick="enableMail(${idEmailCheck}, ${idEmailDiv})">`+
+                                    `<label class="form-check-label" for="${idEmailCheck}">`+
                                         'E-mail'+
                                     '</label>' +
-                                    '<div id="emailHelp" class="form-text">Exemplo: name@example.com</div>' +
+                                    `<div id="${idEmailDiv}" class="form-text">Exemplo: name@example.com</div>` +
                                 '</div>' +
                                 '<div class="form-check">' +
                                     '<input class="form-check-input" type="checkbox" value="" id="flexCheckDefault2">'+
@@ -223,6 +222,16 @@
         let questions = document.getElementById('root');
         questions.removeChild(questions.childNodes[0]);
         //$('div#root').remove();
+    }
+
+    function textoAleatorio(tamanho){
+        var letras = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXTZabcdefghiklmnopqrstuvwxyz';
+        var aleatorio = '';
+        for (var i = 0; i < tamanho; i++) {
+            var rnum = Math.floor(Math.random() * letras.length);
+            aleatorio += letras.substring(rnum, rnum + 1);
+        }
+        return aleatorio;
     }
 </script>
 </body>
