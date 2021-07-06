@@ -31,4 +31,11 @@ public class FormularioController {
         mv.addObject("formDinamico", formulario);
         return mv;
     }
+
+    @GetMapping(value = "/criar", produces = "text/html")
+    public ModelAndView criarFormulario() {
+        ModelAndView mv = new ModelAndView("criarFormulario");
+        mv.addObject("formulario", new Formulario());
+        return mv;
+    }
 }
