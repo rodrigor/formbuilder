@@ -83,6 +83,30 @@ public class FormularioService {
             return novoFormulario;
     }
 
+    public Formulario atualizarFormulario(long formularioId, FormularioDTO formulario){
+        if(formulario == null)
+            throw new IllegalArgumentException("Parâmetro formulario não pode ser nulo");
+
+        if(existe(formularioId)){
+            Formulario formAtualizado = formularioRepository.findById(formularioId);
+            formAtualizado.setTitulo(formulario.getTitulo());
+            formAtualizado.setCampos(formulario.getCampos());
+            this.campoRepository.saveAll(formAtualizado.getCampos());
+            this.formularioRepository.save(formAtualizado);
+            return formAtualizado;
+        }
+        throw new FormularioNaoEncontradoException("Formulário não encontrado");
+    }
+
+    public Formulario deletarFormulario(long formularioId){
+        if(existe(formularioId)){
+            Formulario formularioDeletado = formularioRepository.findById(formularioId);
+            formularioRepository.delete(formularioRepository.findById(formularioId));
+            return formularioDeletado;
+        }
+        throw new FormularioNaoEncontradoException("Formulário não encontrado");
+    }
+
     public boolean existe(Long id) {
         return this.pegarPorId(id) != null;
     }
@@ -96,13 +120,7 @@ public class FormularioService {
         return this.formularioRepository.findByTitulo(titulo);
     }
 
-    // explicar criação
     public Formulario pegarPorId(long id){
         return this.formularioRepository.findById(id);
     }
-
-    public List<Formulario> pegarTodos() {
-        return this.formularioRepository.findAll();
-    }
-
 }

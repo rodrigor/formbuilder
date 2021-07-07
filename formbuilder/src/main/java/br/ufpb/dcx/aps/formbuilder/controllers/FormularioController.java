@@ -46,4 +46,15 @@ public class FormularioController {
     public Formulario criarFormulario(FormularioDTO formulario){
         return this.formularioService.salvarFormulario(formulario);
     }
+
+    @PutMapping("/atualizar/{formularioId}")
+    public Formulario atualizarFormulario(@PathVariable long formularioId, FormularioDTO formlarioDTO){
+        return this.formularioService.atualizarFormulario(formularioId,formlarioDTO);
+    }
+
+    @DeleteMapping("/deletar/{formularioId}")
+    public Formulario deletarFormulario(@PathVariable long formularioId){
+        return this.formularioService.deletarFormulario(formularioId);
+    }
+
 }
