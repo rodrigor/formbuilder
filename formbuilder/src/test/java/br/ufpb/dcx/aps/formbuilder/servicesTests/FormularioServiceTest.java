@@ -6,6 +6,7 @@ import br.ufpb.dcx.aps.formbuilder.models.Formulario;
 import br.ufpb.dcx.aps.formbuilder.repositories.CampoRepository;
 import br.ufpb.dcx.aps.formbuilder.repositories.FormularioRepository;
 import br.ufpb.dcx.aps.formbuilder.services.FormularioService;
+import org.hibernate.mapping.Any;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -98,5 +99,40 @@ public class FormularioServiceTest {
         Exception e = assertThrows(FormularioNaoEncontradoException.class, () ->
                 formularioService.buscaFormulario(4L));
         assertEquals("Formulário não encontrado", e.getMessage());
+    }
+
+    @Test
+    public void atualizarFormularioTest(){
+
+        Formulario formulario = new Formulario();
+        formulario.setTitulo("desatualizado");
+
+        List<Campo> campos  = new ArrayList<>();
+        campos.add(new Campo());
+        formulario.setCampos(campos);
+
+        when(formularioRepository.findById(89L)).thenReturn(formulario);
+
+        FormularioDTO formularioAtualizado = new FormularioDTO("atualizado");
+
+        assertEquals("atualizado", formularioService.atualizarFormulario(89L,formularioAtualizado).getTitulo());
+        assertEquals(formulario.getCampos(), formularioService.atualizarFormulario(89L, formularioAtualizado).getCampos());
+
+        verify(formularioRepository, times(2)).save(formulario);
+        verify(formularioRepository, times(4)).findById(89L);
+    }
+
+    @Test
+    public void deletarFormularioTest(){
+
+        Formulario formularioSalvo = new Formulario();
+        when(formularioRepository.findById(4L)).thenReturn(formularioSalvo);
+
+        assertEquals(formularioSalvo, formularioService.deletarFormulario(4L));
+
+        Exception e = assertThrows(FormularioNaoEncontradoException.class, () ->
+                formularioService.deletarFormulario(10L));
+        assertEquals("Formulário não encontrado", e.getMessage());
+
     }
 }
