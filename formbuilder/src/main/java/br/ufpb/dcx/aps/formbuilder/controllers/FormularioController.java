@@ -1,5 +1,6 @@
 package br.ufpb.dcx.aps.formbuilder.controllers;
 
+import br.ufpb.dcx.aps.formbuilder.models.Campo;
 import br.ufpb.dcx.aps.formbuilder.models.Formulario;
 import br.ufpb.dcx.aps.formbuilder.services.FormularioService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.LinkedList;
 import java.util.List;
 
 @Controller
@@ -36,6 +38,7 @@ public class FormularioController {
     public ModelAndView criarFormulario() {
         ModelAndView mv = new ModelAndView("criarFormulario");
         mv.addObject("formulario", new Formulario());
+        mv.addObject("campos", new LinkedList<Campo>());
         return mv;
     }
 }
