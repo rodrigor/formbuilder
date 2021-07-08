@@ -1,0 +1,202 @@
+<html xmlns:th="http://thymeleaf.org" lang="pt-BR">
+<head>
+    <title>Cadastrar novo produto</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!--Import Google Icon Font-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <!--<link rel="stylesheet" href="style/styleCss.css"/>-->
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@800&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@1,900&family=Nunito:wght@800&display=swap');
+
+        body {
+            background-color: #F2FBFF;
+            padding: 5%;
+            color: #eee;
+            margin: 0;
+            font-family: "Nunito", sans-serif;
+        }
+
+        nav {
+            font-size: 25pt;
+            background-color: #77919E;
+        }
+
+        span {
+            font-size: 20px;
+            font-family: "Nunito", sans-serif;
+            
+        }
+
+        span.details {
+            font-family: 'Lato', sans-serif;
+            font-size: 15px;
+            color: #717982;
+        }
+
+        span.detailsName {
+            font-family: 'Nunito', sans-serif;
+            color: #C6CED6;
+            font-size: 20pt;
+            align-self: center;
+        
+        }
+
+        span.navbar-brand {
+            font-size: 28pt;
+        }
+
+        div.conteudo {
+            font-size: 20px;
+            padding-top: 2%;
+            background-color: #595959;
+            align-items: center;
+            padding-bottom: 20px;
+        }
+
+        div.conteudo .row .col-12 {
+            background-color: #595959;
+        }
+
+
+        div.card-body a {
+            text-decoration: none;
+        }
+        
+    </style>
+</head>
+<body>
+<div class="container conteudo">
+    <div class="row">
+        <nav class="navbar w-100 text-center">
+            <div class="col-4"></div>
+            <div class="col-4">
+                <span class="navbar-brand text-center"> Novo formulário </span>
+            </div>
+            <div class="col-4"></div>
+        </nav>
+    </div>
+    <div class="row">
+        <div class="col">
+        </div>
+        <div class="col-8">
+            <form action="#" th:action="@{/formularios/criar}" th:object="${formulario}" method="post">
+                <div class="form-group">
+                    <label>Titulo do formulário</label>
+                    <input type="text" class="form-control" th:field="*{titulo}" placeholder="Insira o título do formulário">
+                </div>
+                <div class="form-group">
+                    <div id="root" th:object="${campos}"></div>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-info mb-6" onclick="addQuestion()">Adicionar campo</button> 
+                        <button type="submit" class="btn btn-primary mb-6" onclick="addAny()">Remover campo</button>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="col-4"></div>
+                    <div class="col-4"></div>
+                    <div class="col-4">
+                        <div class="form-group col-12">
+                            <a type="submit" class="btn btn-danger mb-6" href="/formularios/">Voltar</a>
+                            <button type="submit" class="btn btn-success mb-6">Confirmar</button>
+                        </div>
+                    </div>                  
+                </div>
+            </form>
+        </div>
+        <div class="col"></div>
+    </div>
+</div>
+<!-- BOOTSTRAP JS -->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.js"></script>
+<script>
+    function enableMail(checkBox, label){
+        if(checkBox.checked) label.style.display = 'block';
+        else label.style.display = 'none';
+    }
+
+    function enableInterval(min, max, check){
+        if(check.checked) {
+            min.style.display = 'block';
+            max.style.display = 'block';
+        } else {
+            min .style.display = 'none';
+            max.style.display = 'none';
+        }
+    }
+
+    function addQuestion(){
+        let idEmailCheck = `email${textoAleatorio(7)}`;
+        let idEmailDiv = `email${textoAleatorio(7)}`;
+        let idIntervalCheck = `inter${textoAleatorio(7)}`;
+        let idMinInput = `min${textoAleatorio(7)}`;
+        let idMaxInput = `max${textoAleatorio(7)}`;
+        let childQuestion = '<section>' +
+                            '<div class="form-group col-12">' +
+                                   ' <label>Pergunta</label>' +
+                                    '<textarea name="txtArea" id="TxtObservacoes" class="char-count form-control" placeholder="Insira a pergunta" maxlength="500"></textarea>'+
+                            '</div>' +
+                            '<div class="form-group col-12">'   +
+                                '<label for="inputPassword4">Validação</label>' +
+                                '<div class="form-check">' +
+                                    `<input class="form-check-input" type="checkbox" value="" id="${idIntervalCheck}" onclick="enableInterval(${idMinInput}, ${idMaxInput}, ${idIntervalCheck})">` +
+                                    `<label class="form-check-label" for="${idIntervalCheck}">`+
+                                        'Intervalo de caracteres' +
+                                    '</label>' +
+                                    '<div class="row">' +
+                                        '<div class="col-6">' +
+                                            `<input type="number"  class="form-control" style="display: none;" placeholder="min" id="${idMinInput}" required>`+
+                                        '</div>'+
+                                        '<div class="col-6">' +
+                                            `<input type="number"  class="form-control"  style="display: none;"  placeholder="max" id="${idMaxInput}" required>`+
+                                        '</div>' +
+                                    '</div>'+
+                                '</div>'+
+                                '<div class="form-check">'+
+                                    `<input class="form-check-input" type="checkbox" value="" id="${idEmailCheck}" onclick="enableMail(${idEmailCheck}, ${idEmailDiv})">`+
+                                    `<label class="form-check-label" for="${idEmailCheck}">`+
+                                        'E-mail'+
+                                    '</label>' +
+                                    `<div id="${idEmailDiv}" style="display: none;"  class="form-text">Exemplo: name@example.com</div>` +
+                                '</div>' +
+                                '<div class="form-check">' +
+                                    '<input class="form-check-input" type="checkbox" value="" id="flexCheckDefault2">'+
+                                    '<label class="form-check-label" for="flexCheckDefault2">' +
+                                        ' Numérico' +
+                                    '</label>' +
+                                '</div>' +
+                                '<div class="form-check">' +
+                                    '<input class="form-check-input" type="checkbox" value="" id="flexCheckDefault3">' +
+                                    '<label class="form-check-label" for="flexCheckDefault3">' +
+                                        'Texto' +
+                                    '</label>' +
+                                '</div>'
+                        + '</section>';
+
+            $('div#root').append(childQuestion);
+    }
+    function addAny(){
+        let questions = document.getElementById('root');
+        questions.removeChild(questions.childNodes[0]);
+        //$('div#root').remove();
+    }
+
+    function textoAleatorio(tamanho){
+        let letras = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXTZabcdefghiklmnopqrstuvwxyz';
+        let aleatorio = '';
+        for (let i = 0; i < tamanho; i++) {
+            let numberRandom = Math.floor(Math.random() * letras.length);
+            aleatorio += letras.substring(numberRandom, numberRandom + 1);
+        }
+        return aleatorio;
+    }
+</script>
+</body>
+</html>
