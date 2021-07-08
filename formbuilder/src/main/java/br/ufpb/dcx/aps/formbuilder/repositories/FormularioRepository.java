@@ -6,5 +6,8 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface FormularioRepository extends JpaRepository<Formulario, Long> {
-    Formulario getByTitulo(String titulo);
+
+    public Formulario findById(long id);
+
+    public Formulario findByTitulo(String titulo);
 }

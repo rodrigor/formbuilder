@@ -4,4 +4,7 @@ import br.ufpb.dcx.aps.formbuilder.models.Campo;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface CampoRepository extends JpaRepository<Campo, Long> {
+
+    public Campo findById(long id);
+
 }
