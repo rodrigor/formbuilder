@@ -9,32 +9,36 @@ public class Resultado {
     private List<String> mensagens = new LinkedList<>();
 
 
-    public Resultado(){
+    public Resultado() {
         temErro = false;
     }
 
-    public Resultado(boolean temErro, String mensagem){
+    public Resultado(boolean temErro, String mensagem) {
         this.temErro = temErro;
         this.addMensagem(mensagem);
     }
 
-    public Resultado(String mensagem){
-        this(false,mensagem);
+    public Resultado(String mensagem) {
+        this(false, mensagem);
     }
 
-    public void addMensagem(String mensagem){
+    public void addMensagem(String mensagem) {
         this.mensagens.add(mensagem);
     }
 
-    public void setErro(boolean erro){
+    public void setErro(boolean erro) {
         this.temErro = erro;
     }
 
-    public boolean isErro(){
+    public boolean isErro() {
         return this.temErro;
     }
 
-    public List<String> getMensagens(){
+    public List<String> getMensagens() {
         return this.mensagens;
+    }
+
+    public String getMensagem(int id) {
+        return this.mensagens.get(id);
     }
 }

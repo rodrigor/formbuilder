@@ -26,4 +26,12 @@ public class Formulario {
     @EqualsAndHashCode.Include
     private String titulo;
 
+    public Resultado validar() {
+        Resultado r = new Resultado();
+        for (ItemFormulario item : this.campos)
+            if (item.validar().isErro())
+                r.addMensagem(item.getId() + ": " + item.validar().getMensagens().get(0));
+        return r;
+    }
+
 }

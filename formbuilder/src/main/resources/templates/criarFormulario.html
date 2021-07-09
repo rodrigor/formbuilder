@@ -91,10 +91,10 @@
                     <input type="text" class="form-control" th:field="*{titulo}" placeholder="Insira o título do formulário">
                 </div>
                 <div class="form-group">
-                    <div id="root" th:object="${campos}"></div>
+                    <div id="root"></div>
                     <div class="form-group">
-                        <button type="submit" class="btn btn-info mb-6" onclick="addQuestion()">Adicionar campo</button> 
-                        <button type="submit" class="btn btn-primary mb-6" onclick="addAny()">Remover campo</button>
+                        <a href="#" class="btn btn-info mb-6" onclick="addQuestion()">Adicionar campo</a>
+                        <a href="#" class="btn btn-primary mb-6" onclick="addAny()">Remover campo</a>
                     </div>
                 </div>
                 <div class="form-row">
@@ -185,7 +185,6 @@
     function addAny(){
         let questions = document.getElementById('root');
         questions.removeChild(questions.childNodes[0]);
-        //$('div#root').remove();
     }
 
     function textoAleatorio(tamanho){

@@ -1,6 +1,7 @@
-package br.ufpb.dcx.aps.formbuilder.validacaoDecorator;
+package br.ufpb.dcx.aps.formbuilder.validador;
 
 import br.ufpb.dcx.aps.formbuilder.models.Resultado;
+
 
 public class ValidadorDecorator implements ValidadorCampo {
 
