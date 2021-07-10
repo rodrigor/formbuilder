@@ -6,7 +6,6 @@ import br.ufpb.dcx.aps.formbuilder.models.Formulario;
 import br.ufpb.dcx.aps.formbuilder.repositories.CampoRepository;
 import br.ufpb.dcx.aps.formbuilder.repositories.FormularioRepository;
 import br.ufpb.dcx.aps.formbuilder.services.FormularioService;
-import org.hibernate.mapping.Any;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
