@@ -18,10 +18,6 @@ public class Resultado {
         this.addMensagem(mensagem);
     }
 
-    public Resultado(String mensagem) {
-        this(false, mensagem);
-    }
-
     public void addMensagem(String mensagem) {
         this.mensagens.add(mensagem);
     }
@@ -32,10 +28,6 @@ public class Resultado {
 
     public boolean isErro() {
         return this.temErro;
-    }
-
-    public List<String> getMensagens() {
-        return this.mensagens;
     }
 
     public String getMensagem(int id) {

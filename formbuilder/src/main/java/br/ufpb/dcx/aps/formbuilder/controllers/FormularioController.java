@@ -72,7 +72,7 @@ public class FormularioController {
 
     @GetMapping(value = "/test/{id}", produces = "application/json")
     public ResponseEntity<?> teste(@PathVariable Long id){
-        return new ResponseEntity<>(this.formularioService.getAllByCampos(id), HttpStatus.OK);
+        return new ResponseEntity<>(this.formularioService.validar(id), HttpStatus.OK);
     }
 
 }

@@ -4,6 +4,7 @@ import br.ufpb.dcx.aps.formbuilder.DTOs.FormularioDTO;
 import br.ufpb.dcx.aps.formbuilder.exceptions.FormularioNaoEncontradoException;
 import br.ufpb.dcx.aps.formbuilder.models.Campo;
 import br.ufpb.dcx.aps.formbuilder.models.Formulario;
+import br.ufpb.dcx.aps.formbuilder.models.OpcoesValidacao;
 import br.ufpb.dcx.aps.formbuilder.models.Resultado;
 import br.ufpb.dcx.aps.formbuilder.repositories.FormularioRepository;
 import br.ufpb.dcx.aps.formbuilder.validador.ValidadorEmail;
@@ -35,15 +36,18 @@ public class FormularioService {
 
         Campo campo1 = new Campo();
         campo1.setLabel("campo email");
-        campo1.setValidador(new ValidadorEmail());
+        campo1.setOpcoesValidacao(OpcoesValidacao.EMAIL);
+        campo1.setValor("teste@teste.com");
 
         Campo campo2 = new Campo();
         campo2.setLabel("campo nome");
-        campo2.setValidador(new ValidadorTextoSimples(3, 256));
+        campo2.setOpcoesValidacao(OpcoesValidacao.TEXTO_SIMPLES);
+        campo2.setValor("a");
 
         Campo campo3 = new Campo();
         campo3.setLabel("campo inteiro");
-        campo3.setValidador(new ValidadorInteiro(1, 10));
+        campo3.setOpcoesValidacao(OpcoesValidacao.INTEIRO);
+        campo3.setValor("abc");
 
 
         this.campoService.salvarCampo(campo1);
@@ -132,10 +136,6 @@ public class FormularioService {
         return this.formularioRepository.findById(id);
     }
 
-    public Resultado validar(){
-       return new Resultado();
-    }
-
     public List<Campo> getAllByCampos(Long id){
         Optional<Formulario> optForm = this.formularioRepository.findById(id);
         if(optForm.isPresent())
@@ -146,8 +146,10 @@ public class FormularioService {
     public Resultado validar(Long id){
         Resultado r = new Resultado();
         for (Campo c : this.getAllByCampos(id))
-            if (c.validar().isErro())
-                r.addMensagem(c.getId() + ": " + c.validar().getMensagem(0));
+            if (c.validar().isErro()){
+                r.addMensagem(c.getLabel() + ": " + c.validar().getMensagem(0));
+                r.setErro(true);
+            }
         return r;
     }
 }
