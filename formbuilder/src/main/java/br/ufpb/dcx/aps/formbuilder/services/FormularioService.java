@@ -1,15 +1,12 @@
 package br.ufpb.dcx.aps.formbuilder.services;
 
 import br.ufpb.dcx.aps.formbuilder.DTOs.FormularioDTO;
-import br.ufpb.dcx.aps.formbuilder.exceptions.FormularioNaoEncontradoException;
+import br.ufpb.dcx.aps.formbuilder.services.exceptions.FormularioNaoEncontradoException;
 import br.ufpb.dcx.aps.formbuilder.models.Campo;
 import br.ufpb.dcx.aps.formbuilder.models.Formulario;
 import br.ufpb.dcx.aps.formbuilder.models.OpcoesValidacao;
 import br.ufpb.dcx.aps.formbuilder.models.Resultado;
 import br.ufpb.dcx.aps.formbuilder.repositories.FormularioRepository;
-import br.ufpb.dcx.aps.formbuilder.validador.ValidadorEmail;
-import br.ufpb.dcx.aps.formbuilder.validador.ValidadorInteiro;
-import br.ufpb.dcx.aps.formbuilder.validador.ValidadorTextoSimples;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

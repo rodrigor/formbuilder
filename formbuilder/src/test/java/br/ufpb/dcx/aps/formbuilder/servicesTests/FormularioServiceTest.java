@@ -1,12 +1,11 @@
 package br.ufpb.dcx.aps.formbuilder.servicesTests;
 import br.ufpb.dcx.aps.formbuilder.DTOs.FormularioDTO;
-import br.ufpb.dcx.aps.formbuilder.exceptions.FormularioNaoEncontradoException;
+import br.ufpb.dcx.aps.formbuilder.services.exceptions.FormularioNaoEncontradoException;
 import br.ufpb.dcx.aps.formbuilder.models.Campo;
 import br.ufpb.dcx.aps.formbuilder.models.Formulario;
 import br.ufpb.dcx.aps.formbuilder.repositories.CampoRepository;
 import br.ufpb.dcx.aps.formbuilder.repositories.FormularioRepository;
 import br.ufpb.dcx.aps.formbuilder.services.FormularioService;
-import org.hibernate.mapping.Any;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;

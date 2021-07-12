@@ -1,4 +1,4 @@
-package br.ufpb.dcx.aps.formbuilder.exceptions;
+package br.ufpb.dcx.aps.formbuilder.services.exceptions;
 
 public class FormularioNaoEncontradoException extends RuntimeException{
 
